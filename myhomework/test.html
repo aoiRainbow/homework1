@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz</title>
+<style>
+    body {
+        font-family: "Microsoft YaHei", sans-serif;
+    }
+    .question {
+        margin-bottom: 20px;
+      }
+    .option-image {
+       max-width: 100px; /* 设置图片的最大宽度 */
+       max-height: 100px; /* 设置图片的最大高度 */
+
+    }
+    .container{
+        width: 60%;
+        padding-top: 20px;
+        padding-left: 100px;
+    }
+    .botton{
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer; s
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div>
+        <div class="question1">
+        <h2>1、在adobe illustrator中，英文字的字距默认设置一般是用（）模式。</h2>
+        <input type="radio" name="q1" value="A、自动"> A、自动<br>
+        <input type="radio" name="q1" value="B、视觉"> B、视觉<br>
+        <input type="radio" name="q1" value="C、公制字（仅罗马字）"> C、公制字（仅罗马字）<br>
+        <input type="radio" name="q1" value="D、按alt随便乱搞"> D、按alt随便乱搞<br>
+    </div>
+
+    <div class="question2">
+        <h2>2、本网页用的是什么字体？</h2>
+        <input type="radio" name="q2" value="A、苹方"> A、苹方<br>
+        <input type="radio" name="q2" value="B、微软雅黑"> B、微软雅黑<br>
+        <input type="radio" name="q2" value="C、思源黑体"> C、思源黑体<br>
+        <input type="radio" name="q2" value="D、方正兰亭黑体"> D、方正兰亭黑体<br>
+    </div>
+
+    <div class="question3">
+        <h2>3、以下哪种装订方式不需要纸品页数为4的倍数？</h2>
+        <input type="radio" name="q3" value="A、骑马订"> A、骑马订<br>
+        <input type="radio" name="q3" value="B、无线胶装"> B、无线胶装<br>
+        <input type="radio" name="q3" value="C、蝴蝶装">C、蝴蝶装<br>
+        <input type="radio" name="q3" value="D、裸背线装">D、裸背线装<br>
+    </div>
+
+    <div class="question4">
+        <h2>4、以下哪种张图不是维也纳分离派的作品？</h2>
+        <input type="radio" name="q4" value="A">A、<img src="img/1.jpg" alt="Example Image" style="max-width: 300px; max-height: 200px;">
+    <br>
+        <input type="radio" name="q4" value="B">B、<img src="img/2.jpg" alt="Example Image" style="max-width: 300px; max-height: 200px;"><br>
+        <input type="radio" name="q4" value="C">C、<img src="img/3.jpg" alt="Example Image" style="max-width: 300px; max-height: 200px;"><br>
+        <input type="radio" name="q4" value="D">D、<img src="img/4.jpg" alt="Example Image" style="max-width: 300px; max-height: 200px;"><br>
+    </div>
+
+    <div class="question5">
+        <h2>5、时尚摄影杂志通常使用的纸张？</h2>
+        <input type="radio" name="q5" value="A、新闻纸"> A、新闻纸<br>
+        <input type="radio" name="q5" value="B、铜版纸"> B、铜版纸<br>
+        <input type="radio" name="q5" value="C、轻涂纸"> C、轻涂纸<br>
+        <input type="radio" name="q5" value="D、哑粉纸"> D、哑粉纸<br>
+    </div>
+
+    <button onclick="calculateScore()">Submit</button>
+    <br>
+    <button class="btn" onclick="back()">这里是一些设计作品小分享</button>
+
+    <div id="score"></div>
+    </div>
+</div>
+
+<script>
+    // Array to store questions and answers
+    var questions = [
+        { question: "1、在adobe illustrator中，英文字的字距默认设置一般是用（）模式。", answer: "B、视觉", score: 20, feedback: "回答正确！", correctAnswer: "B、视觉",feederror:"回答错误！" },
+        { question: '2、本网页用的是什么字体？', answer: "B、微软雅黑", score: 20, feedback: "回答正确！", correctAnswer: "B、微软雅黑",feederror:"回答错误！" },
+        { question: "3、以下哪种装订方式不需要纸品页数为4的倍数？", answer: "B、无线胶装", score: 20, feedback: "回答正确！", correctAnswer: "B、无线胶装",feederror:"回答错误！" },
+        { question: "4、以下哪种张图不是维也纳分离派的作品？", answer: "D", score: 20, feedback: "回答正确！", correctAnswer: "D",feederror:"回答错误！" },
+        { question: "5、时尚摄影杂志通常使用的纸张？", answer: "B、铜版纸", score: 20, feedback: "回答正确！", correctAnswer: "B、铜版纸",feederror:"回答错误！" }
+    ];
+
+    function calculateScore() {
+    var score = 0;
+    for (var i = 0; i < questions.length; i++) {
+        var userAnswer = document.querySelector('input[name="q' + (i+1) + '"]:checked');
+        var questionContainer = document.querySelector('.question' + (i+1));
+        var feedback = document.createElement('p');
+
+        if (userAnswer) {
+            userAnswer = userAnswer.value.toLowerCase();
+            var correctAnswer = questions[i].answer.toLowerCase();
+            var feedbackText = document.createTextNode(userAnswer === correctAnswer ? questions[i].feedback : questions[i].feederror + " 正确答案是：" + questions[i].answer);
+
+            if (userAnswer === correctAnswer) {
+                score += questions[i].score;
+            }
+
+            feedback.appendChild(feedbackText);
+            questionContainer.appendChild(feedback);
+        } else {
+            feedback.textContent =questions[i].feederror + " 正确答案是：" + questions[i].answer;
+            questionContainer.appendChild(feedback);
+        }
+    }
+
+    // 弹窗显示总分及评语
+    var scoreDisplay = 'Your score: ' + score + ' out of ' + (questions.length * 20);
+    var comment = "";
+    if (score === 100) {
+        comment = "这还差不多。";
+    } else if (score >= 80) {
+        comment = "错一题，要加油哦。";
+    } else if (score >= 60) {
+        comment = "怎么会有人做错两道的。";
+    } else if(score >= 40) {
+        comment = "你是随便乱点的吧！！！";
+    }else if(score >= 20) {
+        comment = "你是笨蛋吗？？？";
+    }else{
+        comment = "你是笨蛋吧。";
+    }
+    alert(scoreDisplay + "\n" + comment);
+}
+function back(){
+    location.href = './explanation.html'
+}
+</script>
+
+
+</body>
+</html>

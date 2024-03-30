@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>问答题</title>
+<link rel="stylesheet" href="first.css">
+<style>
+  /* 居中样式 */
+  body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+  /* 居中标题的样式 */
+  .centered-title {
+    text-align: center;
+  }
+  /* 标题的样式 */
+  .title {
+    font-size: 72px; /* 标题字号 */
+  }
+  /* 副标题的样式 */
+  .subtitle {
+    font-size: 24px; /* 副标题字号 */
+  }
+  /* 按钮的样式 */
+  button {
+     margin-top: 20px;
+     padding: 10px 20px;
+     font-size: 16px;
+     background-color: #007bff;
+     color: #fff;
+     border: none;
+     border-radius: 5px;
+     cursor: pointer;
+  }
+  }
+  /* 按钮样式 */
+  button {
+    display: block;
+    margin-top: 20px;
+  }
+  .search-container {
+              text-align: center;
+              margin:auto;
+}
+</style>
+
+</head>
+<body>
+
+<div id="page1">
+  <h1 class="centered-title title">平面设计小知识测试</h1>
+  <h2 class="centered-title subtitle">连这你都不知道？</h2>
+  <input type="text" id="searchBox" placeholder="请在这里输入你的名字">
+  <button class="first" onclick="redirectToQuestionPage()">GO GO GO！</button>
+</div>
+
+<script>
+  function redirectToQuestionPage() {
+    window.location.href = "test.html";
+  }
+</script>
+
+</body>
+</html>
